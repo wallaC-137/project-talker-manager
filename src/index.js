@@ -15,7 +15,9 @@ const fileReader = async () => {
     const test = await fs.readFile(pathTalker, 'utf-8');
     console.log(JSON.parse(test));
     return JSON.parse(test);
-  } catch (error) {}
+  } catch (error) {
+    null;
+  }
 };
 
 // não remova esse endpoint, e para o avaliador funcionar
