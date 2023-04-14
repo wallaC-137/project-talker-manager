@@ -15,21 +15,16 @@ const fileReader = async () => {
   try {
     const test = await fs.readFile(pathTalker, 'utf-8');
     return JSON.parse(test);
-  } catch (error) {
-    console.error(`error${error}`);
+  } catch (err) {
+    console.error(`error${err}`);
   }
 };
 
 const firstFileFound = async (idSearch) => {
   const date = await fileReader();
   const response = date.find(({ id }) => id === Number(idSearch));
-  try {
-    if (response) return response;
-    throw error;
-  } catch (error) {
-    console.error(`error${error}`);
-    return {};
-  }
+  if (response) return response;
+  return {};
 };
 
 // não remova esse endpoint, e para o avaliador funcionar
