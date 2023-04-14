@@ -26,22 +26,42 @@ const firstFileFound = async (idSearch) => {
   return {};
 };
 
+const tokenGenerator = () => {
+  const tokenLength = 16;
+  const possibleChars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let token = '';
+  for (let i = 0; i < tokenLength; i += 1) {
+    token += possibleChars.charAt(
+      Math.floor(Math.random() * possibleChars.length)
+    );
+  }
+  return token;
+};
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
+// req 1
 app.get('/talker', async (req, res) => {
   const data = await fileReader();
   res.status(200).json(data || []);
 });
 
+// req 2
 app.get('/talker/:id', async (req, res) => {
   const { id } = req.params;
   const data = await firstFileFound(id);
   if ('name' in data) return res.status(200).json(data);
 
   res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+});
+
+// req 3
+app.post('/login', (req, res) => {
+  res.status(200).json({ token: tokenGenerator() });
 });
 
 app.listen(PORT, () => {
