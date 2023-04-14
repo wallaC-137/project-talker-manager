@@ -13,10 +13,9 @@ const pathTalker = path.resolve(__dirname, 'talker.json');
 const fileReader = async () => {
   try {
     const test = await fs.readFile(pathTalker, 'utf-8');
-    console.log(JSON.parse(test));
     return JSON.parse(test);
   } catch (error) {
-    null;
+    console.error('error');
   }
 };
 
