@@ -16,7 +16,7 @@ const fileReader = async () => {
     const test = await fs.readFile(pathTalker, 'utf-8');
     return JSON.parse(test);
   } catch (error) {
-    console.error('error');
+    console.error(`error${error}`);
   }
 };
 
@@ -27,6 +27,7 @@ const firstFileFound = async (idSearch) => {
     if (response) return response;
     throw error;
   } catch (error) {
+    console.error(`error${error}`);
     return {};
   }
 };
