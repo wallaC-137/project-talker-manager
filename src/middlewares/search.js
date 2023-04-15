@@ -1,9 +1,7 @@
 const fs = require('fs').promises;
 // const path = require('path');
 
-
 // const pathTalker = path.resolve(__dirname, 'talker.json');
-
 
 const pathTalker = 'src/talker.json';
 
@@ -25,5 +23,5 @@ const firstFileFound = async (idSearch) => {
 
 module.exports = {
   fileReader,
-  firstFileFound
-}
+  firstFileFound,
+};

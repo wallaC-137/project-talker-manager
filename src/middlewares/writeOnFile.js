@@ -1,5 +1,5 @@
-const { fileReader } = require('./search');
 const fs = require('fs').promises;
+const { fileReader } = require('./search');
 
 const pathTalker = 'src/talker.json';
 
@@ -13,7 +13,9 @@ const wireOnFile = async (newTalker) => {
   try {
     await fs.writeFile(pathTalker, JSON.stringify(insertTalker));
     return await fileReader();
-  } catch (err) {}
+  } catch (err) {
+    console.error(err);
+  }
   // console.log(allTalkers);
   // return a;
 };

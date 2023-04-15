@@ -2,7 +2,11 @@ const express = require('express');
 
 const { fileReader, firstFileFound } = require('./middlewares/search');
 const tokenGenerator = require('./middlewares/tokenGenerator');
-const emailAndPassword = require('./middlewares/loginValidation');
+const {
+  emailValidation,
+  passwordValidation,
+} = require('./middlewares/loginValidation');
+
 // const wireOnFile = require('./middlewares/writeOnFile');
 
 const app = express();
@@ -36,17 +40,17 @@ app.get('/talker/:id', async (req, res) => {
 });
 
 // req 3 e 4
-app.post('/login', emailAndPassword, (_req, res) => {
+app.post('/login', emailValidation, passwordValidation, (_req, res) => {
   res.status(200).json({ token: tokenGenerator() });
 });
 
 // req 5
 // app.post('/talker', async (req, res) => {
-  // const algo = await wireOnFile(req.body);
+// const algo = await wireOnFile(req.body);
 
-  // console.log('algo', algo);
+// console.log('algo', algo);
 
-  // res.status(200).send(console.log('foi'));
+// res.status(200).send(console.log('foi'));
 // });
 
 app.listen(PORT, () => {

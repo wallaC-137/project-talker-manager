@@ -10,4 +10,4 @@ const tokenGenerator = () => {
   return token;
 };
 
-module.exports = tokenGenerator
+module.exports = tokenGenerator;

@@ -1,29 +1,42 @@
-const emailAndPassword = (req, res, next) => {
-  const { email, password } = req.body;
+const emailValidation = (req, res, next) => {
+  const { email } = req.body;
 
-  const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-  const passwordValidation = Number(password).length >= 6;
-  
+  const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
+  console.log('email', email);
   try {
     if (!email) {
-      throw new Error("O campo \"email\" é obrigatório")
-    };
+      throw new Error('O campo "email" é obrigatório');
+    }
 
     if (!regexEmail) {
-      throw new Error("O \"email\" deve ter o formato \"email@email.com\"")
-    };
-
-    if (!password) {
-      throw new Error("O campo \"password\" é obrigatório")
+      throw new Error('O "email" deve ter o formato "email@email.com"');
     }
-    
-    if (!passwordValidation) {
-      throw new Error("O \"password\" deve ter pelo menos 6 caracteres")
-    };
   } catch (err) {
-    return res.status(400).json({message: err.message});
+    return res.status(400).json({ message: err.message });
   }
   next();
-}
+};
 
-module.exports = emailAndPassword;
+const passwordValidation = (req, res, next) => {
+  const { password } = req.body;
+
+  console.log('password', password);
+
+  try {
+    if (!password) {
+      throw new Error('O campo "password" é obrigatório');
+    }
+
+    if (password.length < 6) {
+      throw new Error('O "password" deve ter pelo menos 6 caracteres');
+    }
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+  next();
+};
+
+module.exports = {
+  emailValidation,
+  passwordValidation,
+};
