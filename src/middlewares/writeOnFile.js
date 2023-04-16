@@ -3,7 +3,7 @@ const { fileReader } = require('./search');
 
 const pathTalker = 'src/talker.json';
 
-const wireOnFile = async (newTalker) => {
+const writeOnFile = async (newTalker) => {
   const allTalkers = await fileReader();
   // console.log([...allTalkers, { id: allTalkers.length + 1, ...newTalker }]);
   const lastTalker = { id: allTalkers.length + 1, ...newTalker };
@@ -21,4 +21,4 @@ const wireOnFile = async (newTalker) => {
   // return a;
 };
 
-module.exports = wireOnFile;
+module.exports = writeOnFile;
