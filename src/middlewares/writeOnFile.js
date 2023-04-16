@@ -6,13 +6,14 @@ const pathTalker = 'src/talker.json';
 const wireOnFile = async (newTalker) => {
   const allTalkers = await fileReader();
   // console.log([...allTalkers, { id: allTalkers.length + 1, ...newTalker }]);
+  const lastTalker = { id: allTalkers.length + 1, ...newTalker };
   const insertTalker = [
     ...allTalkers,
-    { id: allTalkers.length + 1, ...newTalker },
+    lastTalker,
   ];
   try {
     await fs.writeFile(pathTalker, JSON.stringify(insertTalker));
-    return await fileReader();
+    return lastTalker;
   } catch (err) {
     console.error(err);
   }

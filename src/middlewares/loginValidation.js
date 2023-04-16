@@ -2,7 +2,6 @@ const emailValidation = (req, res, next) => {
   const { email } = req.body;
 
   const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
-  console.log('email', email);
   try {
     if (!email) {
       throw new Error('O campo "email" é obrigatório');
@@ -19,8 +18,6 @@ const emailValidation = (req, res, next) => {
 
 const passwordValidation = (req, res, next) => {
   const { password } = req.body;
-
-  console.log('password', password);
 
   try {
     if (!password) {

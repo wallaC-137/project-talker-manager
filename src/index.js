@@ -6,8 +6,15 @@ const {
   emailValidation,
   passwordValidation,
 } = require('./middlewares/loginValidation');
-
-// const wireOnFile = require('./middlewares/writeOnFile');
+const tokenValidation = require('./middlewares/tokenValidation');
+const wireOnFile = require('./middlewares/writeOnFile');
+const { 
+  nameValidation,
+  ageValidation,
+  talkValidation,
+  watchedAtValidation,
+  rateValidation,
+ } = require('./middlewares/talkerValidation');
 
 const app = express();
 app.use(express.json());
@@ -45,13 +52,17 @@ app.post('/login', emailValidation, passwordValidation, (_req, res) => {
 });
 
 // req 5
-// app.post('/talker', async (req, res) => {
-// const algo = await wireOnFile(req.body);
-
-// console.log('algo', algo);
-
-// res.status(200).send(console.log('foi'));
-// });
+app.post('/talker',
+tokenValidation,
+nameValidation,
+ageValidation,
+talkValidation,
+watchedAtValidation,
+rateValidation,
+async (req, res) => {
+  const lastTalker = await wireOnFile(req.body);
+  res.status(201).send(lastTalker);
+});
 
 app.listen(PORT, () => {
   console.log('Online');
