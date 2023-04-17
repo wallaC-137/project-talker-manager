@@ -1,22 +1,21 @@
 const express = require('express');
 
-const { fileReader, firstFileFound } = require('./middlewares/search');
-const tokenGenerator = require('./middlewares/tokenGenerator');
 const {
+  fileReader,
+  firstFileFound,
+  tokenGenerator,
   emailValidation,
   passwordValidation,
-} = require('./middlewares/loginValidation');
-const tokenValidation = require('./middlewares/tokenValidation');
-const writeOnFile = require('./middlewares/writeOnFile');
-const { 
+  tokenValidation,
+  writeOnFile,
   nameValidation,
   ageValidation,
   talkValidation,
   watchedAtValidation,
   rateValidation,
- } = require('./middlewares/talkerValidation');
-const updateTalker = require('./middlewares/updateTalker');
-const deleteTalker = require('./middlewares/deleteTalker');
+  updateTalker,
+  deleteTalker,
+} = require('./pathsImports');
 
 const app = express();
 app.use(express.json());
