@@ -5,7 +5,6 @@ const pathTalker = 'src/talker.json';
 
 const writeOnFile = async (newTalker) => {
   const allTalkers = await fileReader();
-  // console.log([...allTalkers, { id: allTalkers.length + 1, ...newTalker }]);
   const lastTalker = { id: allTalkers.length + 1, ...newTalker };
   const insertTalker = [
     ...allTalkers,
@@ -17,8 +16,6 @@ const writeOnFile = async (newTalker) => {
   } catch (err) {
     console.error(err);
   }
-  // console.log(allTalkers);
-  // return a;
 };
 
 module.exports = writeOnFile;

@@ -16,16 +16,13 @@ const {
   rateValidation,
  } = require('./middlewares/talkerValidation');
 const updateTalker = require('./middlewares/updateTalker');
+const deleteTalker = require('./middlewares/deleteTalker');
 
 const app = express();
 app.use(express.json());
 
 const HTTP_OK_STATUS = 200;
 const PORT = process.env.PORT || '3001';
-
-// wireOnFile();
-// (async () => console.log(await wireOnFile()))();
-// (async () => console.log('foi', await algo.fileReader()))()
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
@@ -74,6 +71,12 @@ talkValidation,
 watchedAtValidation,
 rateValidation,
 updateTalker);
+
+// req 7 
+app.delete('/talker/:id',
+tokenValidation,
+deleteTalker,
+async (req, res) => res.status(204).end());
 
 app.listen(PORT, () => {
   console.log('Online');
